@@ -1,0 +1,5 @@
+.note__container {
+  min-width: 69px;
+  display: flex;
+  justify-content: space-between;
+}

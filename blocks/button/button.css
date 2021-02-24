@@ -1,0 +1,16 @@
+.button {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background-color: inherit;
+  transition: opacity .3s ease-in-out;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.6;
+}
