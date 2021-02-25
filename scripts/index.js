@@ -4,11 +4,12 @@ const noteTemplate = page.querySelector('.note-template').content;
 
 const noteItem = noteTemplate.querySelector('.note');
 
-initialNotes.forEach((item) => {
-  notes.prepend(getNote(item));
-});
+function render() {
+  const initialArrayOfElements = initialNotes.map(getNote);
+  notes.prepend(...initialArrayOfElements);
+}
 
-function getNote (item) {
+function getNote(item) {
   const noteElement = noteItem.cloneNode(true);
   const noteTitle = noteElement.querySelector('.note__title');
 
@@ -17,3 +18,5 @@ function getNote (item) {
 
   return noteElement;
 }
+
+render();
