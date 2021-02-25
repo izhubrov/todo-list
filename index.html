@@ -7,7 +7,7 @@
   <meta name="description" content="Страница с перечнем дел">
   <link rel="stylesheet" href="./pages/index.css">
   <link rel="icon" href="./images/logo-icon.png">
-  <script src="./scripts/initial-cards.js"></script>
+  <script src="./scripts/initial-notes.js"></script>
   <script src="./scripts/index.js" defer></script>
   <title>Todo List</title>
 </head>
@@ -16,29 +16,27 @@
     <h1 class="header__title">Todo List</h1>
   </header>
   <main>
-    <section class="todo page__container">
-    <ul class="notes">
-      <li class="note">
-        <h2 class="note__title">12341231231 🍪</h2>
-        <div class="note__container">
-          <button type="button" class="button button_type_edit"></button>
-          <button type="button" class="button button_type_duplicate"></button>
-          <button type="button" class="button button_type_remove"></button>
-        </div>
-      </li>
-      <li class="note">
-        <h2 class="note__title">12312312312312 🍪</h2>
-        <div class="note__container">
-          <button type="button" class="button button_type_edit"></button>
-          <button type="button" class="button button_type_duplicate"></button>
-          <button type="button" class="button button_type_remove"></button>
-        </div>
-      </li>
-    </ul>
-  </section>
-  </main>
-  <footer>
 
+    <section class="todo page__container">
+      <ul class="notes">
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="footer page__container">
+    <p class="footer__author">&copy; 2021 Иван Жубров</p>
   </footer>
+
+  <template class="note-template">
+    <li class="note">
+      <h2 class="note__title">12312312312312 🍪</h2>
+      <div class="note__container">
+        <button type="button" class="button button_type_edit"></button>
+        <button type="button" class="button button_type_duplicate"></button>
+        <button type="button" class="button button_type_remove"></button>
+      </div>
+    </li>
+  </template>
 </body>
 </html>

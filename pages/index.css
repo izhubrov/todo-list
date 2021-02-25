@@ -17,3 +17,6 @@
 @import url(../blocks/button/_type/button_type_duplicate.css);
 @import url(../blocks/button/_type/button_type_edit.css);
 @import url(../blocks/button/_type/button_type_remove.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__author/footer__author.css);
