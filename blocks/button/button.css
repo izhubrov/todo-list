@@ -2,8 +2,9 @@
   width: 20px;
   height: 20px;
   border: none;
+  outline: none;
   background-color: inherit;
-  transition: opacity .3s ease-in-out;
+  transition: All .5s ease-in-out;
   background-position: center;
   background-repeat: no-repeat;
   padding: 0;

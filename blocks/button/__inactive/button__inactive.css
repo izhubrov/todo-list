@@ -1,0 +1,7 @@
+.button__inactive {
+  opacity: 0.3;
+}
+
+.button__inactive:hover {
+  opacity: 0.3;
+}

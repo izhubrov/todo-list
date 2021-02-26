@@ -1,9 +1,10 @@
 .notes {
-  padding: 15px 0 36px;
+  padding: 0;
+  margin: 0;
   display: grid;
   row-gap: 20px;
   grid-template-columns: 100%;
-  width: 48%;
+  width: 100%;
   list-style: none;
   justify-content: center;
 }
