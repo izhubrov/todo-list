@@ -42,7 +42,28 @@ function handleDuplicateNote(evt) {
 }
 
 function handleEditNote(evt) {
+  if (evt.target.classList.contains('button_type_edit')) {
+    let noteElement = evt.target.closest('.note');
+    const noteTitle = noteElement.querySelector('.note__title');
 
+    inputTodo.value = noteTitle.textContent;
+    console.log(inputTodo.value);
+
+    enableValidation()
+
+    buttonAdd.classList.remove('button_type_add');
+    buttonAdd.classList.add('button_type_edit');
+    form.removeEventListener('submit', handleAddNote);
+    form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      noteTitle.textContent = inputTodo.value;
+      form.reset();
+      noteElement = '';
+      buttonAdd.classList.add('button_type_add');
+      buttonAdd.classList.remove('button_type_edit');
+      setInitialStateOfButtonAdd();
+    })
+  }
 }
 
 render();
@@ -54,14 +75,21 @@ function setInitialStateOfButtonAdd() {
 
 setInitialStateOfButtonAdd();
 
-function IsInvalidInput() {
+function setValidityStateofButtonAdd() {
+  buttonAdd.classList.remove('button__inactive');
+  buttonAdd.removeAttribute('disabled');
+}
+
+function isValidInput() {
   return inputTodo.validity.valid;
 }
 
 function enableValidation() {
-  if (isInvalidInput() === 'false') {
-    buttonAdd.classList.remove('button__inactive');
-    buttonAdd.removeAttribute('disabled');
+  if (isValidInput() && inputTodo.value !== '') {
+    setValidityStateofButtonAdd() 
+  }
+  else {
+    setInitialStateOfButtonAdd()
   }
 }
 
@@ -71,6 +99,7 @@ function handleAddNote(evt) {
   notes.prepend(newItem);
 
   form.reset();
+  setInitialStateOfButtonAdd()  
 }
 
 
