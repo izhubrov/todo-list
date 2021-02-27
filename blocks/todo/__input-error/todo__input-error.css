@@ -1,0 +1,11 @@
+.todo__input-error {
+  padding-top: 5px;
+  font-family: inherit;
+  color: rgb(168, 8, 8);
+  height: 39px;
+  display: none;
+  max-width: 100%;  
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.18;
+}

@@ -1,9 +1,21 @@
+@keyframes appear{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .note {
-  display: none;
+  animation: appear .5s ease-in-out;
+  animation-fill-mode: both;
+  display: flex;
   border: 1px solid #808080;
   border-radius: 7px;
   justify-content: space-between;
   align-items: center;
   padding: 20px 35px;
-  max-width: 100%;
+  box-sizing: border-box;
+  width: 100%;
 }

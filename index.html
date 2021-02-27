@@ -19,7 +19,10 @@
 
     <section class="todo page__container">
       <form class="todo__form" novalidate>
-        <input type="text" class="todo__input" name="title" placeholder="Введите новое дело" minlength="3" maxlength="50"></input>
+        <label class="todo__field">
+          <input type="text" class="todo__input" name="title" placeholder="Название дела" minlength="4" maxlength="50"></input>
+          <span class="todo__input-error"></span>
+        </label>
         <button type="submit" class="button button_type_add" aria-label="Добавить"></button>
       </form>
       <ul class="notes">
@@ -33,7 +36,7 @@
   </footer>
 
   <template class="note-template">
-    <li class="note note__opened">
+    <li class="note">
       <h2 class="note__title"></h2>
       <div class="note__container">
         <button type="button" class="button button_type_edit" aria-label="Редактировать"></button>

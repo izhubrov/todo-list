@@ -1,6 +1,9 @@
 .todo__form {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: row;
+  width: 100%;
+  min-height: 65px;
 }
 

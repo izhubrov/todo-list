@@ -9,3 +9,17 @@
   white-space: nowrap;
   width: 75%;
 }
+
+@media screen and (max-width: 786px) {
+  .note__title {
+    font-size: 18px;
+    line-height: 1.24;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .note__title {
+    font-size: 16px;
+    line-height: 1.24;
+  }
+}
