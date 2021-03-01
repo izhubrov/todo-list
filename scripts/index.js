@@ -1,14 +1,13 @@
 const page = document.querySelector('.page');
 const notes = page.querySelector('.notes');
+const overlay = page.querySelector('.overlay');
 const form = page.querySelector('.todo__form');
 const inputTodo = form.querySelector('.todo__input');
 const inputError = form.querySelector('.todo__input-error');
-const buttonAdd = form.querySelector('.button');
+const buttonAddOrReplace = form.querySelector('.button');
 const noteTemplate = page.querySelector('.note-template').content;
-
 const noteItem = noteTemplate.querySelector('.note');
 let editedNote ='';
-let nextNote ='';
 
 // Отрисовка изначального списка Todo
 function render() {
@@ -38,112 +37,65 @@ function handleRemoveNote(evt) {
 
 function handleDuplicateNote(evt) {
   if (evt.target.classList.contains('button_type_duplicate')) {
-    const noteElement = evt.target.closest('.note');
+    const noteElementDuplicate = evt.target.closest('.note');
+    const noteTitle = noteElementDuplicate.querySelector('.note__title');
 
-    const duplicatedElement = getNote(noteElement);
-    duplicatedElement.querySelector('.note__title').textContent = noteElement.querySelector('.note__title').textContent;
+    const duplicatedElement = getNote(noteElementDuplicate);
 
-    noteElement.after(duplicatedElement);
+    duplicatedElement.querySelector('.note__title').textContent = noteTitle.textContent;
+
+    noteElementDuplicate.after(duplicatedElement);
   }
+}
+
+function changeIconOfButton(previousIcon, newIcon) {
+  buttonAddOrReplace.classList.remove(previousIcon);
+  buttonAddOrReplace.classList.add(newIcon);
 }
 
 function handleEditNote(evt) {
   if (evt.target.classList.contains('button_type_edit')) {
-    
     const noteElement = evt.target.closest('.note');
     const noteTitle = noteElement.querySelector('.note__title');
 
+    overlay.classList.add('overlay__active');
     inputTodo.value = noteTitle.textContent;
     editedNote = noteElement;
-    nextNote = noteElement.nextElementSibling;//нужен, если удалили элемент, который нажали редактировать
+    inputTodo.focus()
 
-    setValidityStateOfButtonAdd()
-
-    buttonAdd.classList.remove('button_type_add');
-    buttonAdd.classList.add('button_type_edit');
+    changeIconOfButton('button_type_add', 'button_type_edit');
   }
 }
 
 render();
 
-//Работа с состояниями кнопок и валидацией
-function setInitialStateOfButtonAdd() {
-  buttonAdd.classList.add('button__inactive');
-  buttonAdd.setAttribute('disabled',true);
-}
 
-setInitialStateOfButtonAdd();
-
-function setValidityStateOfButtonAdd() {
-  buttonAdd.classList.remove('button__inactive');
-  buttonAdd.removeAttribute('disabled');
-}
-
-function isValidInput() {
-  return inputTodo.validity.valid;
-}
-
-function showInputError() {
-  inputError.classList.add('todo__input-error_active');
-  inputTodo.classList.add('todo__input_type_error');
-  inputError.textContent = inputTodo.validationMessage;
-}
-
-function hideInputError() {
-  inputError.classList.remove('todo__input-error_active');
-  inputTodo.classList.remove('todo__input_type_error');
-  inputError.textContent = '';
-}
-
-function enableValidation() {
-  if (isValidInput() && inputTodo.value !== '') {
-    setValidityStateOfButtonAdd()
-    hideInputError()
-  }
-  else {
-    setInitialStateOfButtonAdd()
-      if (inputTodo.value == '') {
-        hideInputError();
-      }
-    showInputError()
-  }
-}
-
-// Ищем, где разместить отредактированное дело
+// Размещаем отредактированное дело
 function setEditedNote (newItem) {
-  if (editedNote) {
-    editedNote.replaceWith(newItem);
-    editedNote = '';
-  } 
-    //проверка на то, если нажали редактировать элемент, но после его удалили...
-  else if (nextNote){
-    nextNote.before(newItem);
-    nextNote = '';
-  }
-    //проверка на то, если нажали редактировать элемент, но после его удалили и удалили его нижнего соседа...
-  else {
-    notes.prepend(newItem);
-  }
 
-  buttonAdd.classList.remove('button_type_edit');
-  buttonAdd.classList.add('button_type_add');
+  editedNote.replaceWith(newItem);
+
+  editedNote = '';
+
+  changeIconOfButton('button_type_edit', 'button_type_add');
+  overlay.classList.remove('overlay__active');
 }
 
 // Слушатель на добавление или редактирование (изменение) дела ToDo
 function handleAddOrReplaceNote(evt) {
   evt.preventDefault();
   const newItem = getNote({title: inputTodo.value});
-  if (buttonAdd.classList.contains('button_type_add')) {
-    notes.prepend(newItem);
+
+  if (buttonAddOrReplace.classList.contains('button_type_add')) {
+    notes.prepend(newItem);//если активна кнопка добавить, то размещаем новое задание в конце списка Todo
   } else {
-    setEditedNote(newItem)
+    setEditedNote(newItem)//если активна кнопка редактировать, то размещаем отредактированную карточку заместо предыдущей
   }
 
   form.reset();
-  setInitialStateOfButtonAdd()  
 }
 
 
 form.addEventListener('submit', handleAddOrReplaceNote);
-inputTodo.addEventListener('input', enableValidation);
+
 
