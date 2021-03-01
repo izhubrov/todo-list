@@ -7,6 +7,7 @@ function setInitialStateOfButtonAdd() {
 setInitialStateOfButtonAdd()
 
 function setValidityStateOfButtonAdd() {
+  if (isEmptyInput()) return;
   buttonAddOrReplace.classList.remove('button__inactive');
   buttonAddOrReplace.removeAttribute('disabled');
 }
@@ -32,16 +33,13 @@ function hideInputError() {
 }
 
 function checkInputValidity() {
-  if (isValidInput() && !isEmptyInput()) {
+  if ( isValidInput() ) {
     setValidityStateOfButtonAdd()
     hideInputError()
   }
   else {
-    if ( isEmptyInput() ) {
-      hideInputError();
-    } else {
-      showInputError()
-    }
+    if (isEmptyInput()) hideInputError()
+    else showInputError()
     setInitialStateOfButtonAdd()
   }
 }
